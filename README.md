@@ -101,11 +101,11 @@ export default PdfViewer;
 import { RPConfig, RPConfigProps } from "@pdf-viewer/react";
 import { FC } from "react";
 
-const PdfConfig: FC<RPConfigProps> = ({ children }) => (
+const AppProviders: FC<RPConfigProps> = ({ children }) => (
   <RPConfig licenseKey="your-license-key">{children}</RPConfig>
 );
 
-export default PdfConfig;
+export default AppProviders;
 ```
 
 3. **Disable SSR for AppPdfViewer**: Disable SSR for the AppPdfViewer component by using `dynamic` from `next/dynamic` and set `ssr: false`
@@ -119,13 +119,13 @@ export const LazyAppPdfViewer = dynamic(() => import("./AppPdfViewer"), {
 });
 ```
 
-4. **Disable SSR for RPConfig**: Disable SSR for RPConfig by using `dynamic` from `next/dynamic` and set `ssr: false`
+4. **Disable SSR for AppProviders**: Disable SSR for AppProviders by using `dynamic` from `next/dynamic` and set `ssr: false`
 
 ```tsx
 "use client";
 import dynamic from "next/dynamic";
 
-export const LazyPdfConfig = dynamic(() => import("./PdfConfig"), {
+export const LazyAppProviders = dynamic(() => import("./AppProviders"), {
   ssr: false,
 });
 ```
@@ -134,7 +134,7 @@ export const LazyPdfConfig = dynamic(() => import("./PdfConfig"), {
 
 ```jsx
 import "./globals.css";
-import { LazyPdfConfig } from "./components/LazyPdfConfig";
+import { LazyAppProviders } from "./components/LazyAppProviders";
 
 export default function RootLayout({
   children,
@@ -144,9 +144,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"antialiased"}>
-        <LazyPdfConfig licenseKey="your-license-key">
+        <LazyAppProviders licenseKey="your-license-key">
           <main>{children}</main>
-        </LazyPdfConfig>
+        </LazyAppProviders>
       </body>
     </html>
   );
@@ -156,7 +156,6 @@ export default function RootLayout({
 6. **Use the LazyAppPdfViewer component in page**: Add the React PDF component to your page
 
 ```jsx
-import { LazyPdfConfig } from "./components/LazyPdfConfig";
 import { LazyAppPdfViewer } from "./components/LazyAppPdfViewer";
 
 export default function Home() {
