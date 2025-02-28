@@ -12,7 +12,7 @@ interface Props {
   defaultLayoutProps?: RPLayoutProps;
 }
 
-const AppPDFViewer = (props: Props) => {
+const AppPdfViewer = (props: Props) => {
   const { showToolbar = true, providerProps, defaultLayoutProps } = props;
 
   return (
@@ -33,4 +33,4 @@ const AppPDFViewer = (props: Props) => {
   );
 };
 
-export default AppPDFViewer;
+export default AppPdfViewer;

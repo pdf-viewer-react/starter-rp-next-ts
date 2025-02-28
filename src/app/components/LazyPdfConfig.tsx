@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 
-export const LazyPDFConfig = dynamic(() => import("./PDFConfig"), {
+export const LazyPdfConfig = dynamic(() => import("./PdfConfig"), {
   ssr: false,
 });

@@ -71,7 +71,7 @@ interface Props {
   defaultLayoutProps?: RPLayoutProps;
 }
 
-const AppPDFViewer = (props: Props) => {
+const AppPdfViewer = (props: Props) => {
   const { showToolbar = true, providerProps, defaultLayoutProps } = props;
 
   return (
@@ -92,7 +92,7 @@ const AppPDFViewer = (props: Props) => {
   );
 };
 
-export default PDFViewer;
+export default PdfViewer;
 ```
 
 2. **Import Config Component**: Import the Config component
@@ -101,20 +101,20 @@ export default PDFViewer;
 import { RPConfig, RPConfigProps } from "@pdf-viewer/react";
 import { FC } from "react";
 
-const PDFConfig: FC<RPConfigProps> = ({ children }) => (
+const PdfConfig: FC<RPConfigProps> = ({ children }) => (
   <RPConfig licenseKey="your-license-key">{children}</RPConfig>
 );
 
-export default PDFConfig;
+export default PdfConfig;
 ```
 
-3. **Disable SSR for AppPDFViewer**: Disable SSR for the AppPDFViewer component by using `dynamic` from `next/dynamic` and set `ssr: false`
+3. **Disable SSR for AppPdfViewer**: Disable SSR for the AppPdfViewer component by using `dynamic` from `next/dynamic` and set `ssr: false`
 
 ```tsx
 "use client";
 import dynamic from "next/dynamic";
 
-export const LazyAppPDFViewer = dynamic(() => import("./AppPDFViewer"), {
+export const LazyAppPdfViewer = dynamic(() => import("./AppPdfViewer"), {
   ssr: false,
 });
 ```
@@ -125,7 +125,7 @@ export const LazyAppPDFViewer = dynamic(() => import("./AppPDFViewer"), {
 "use client";
 import dynamic from "next/dynamic";
 
-export const LazyPDFConfig = dynamic(() => import("./PDFConfig"), {
+export const LazyPdfConfig = dynamic(() => import("./PdfConfig"), {
   ssr: false,
 });
 ```
@@ -134,7 +134,7 @@ export const LazyPDFConfig = dynamic(() => import("./PDFConfig"), {
 
 ```jsx
 import "./globals.css";
-import { LazyPDFConfig } from "./components/LazyPDFConfig";
+import { LazyPdfConfig } from "./components/LazyPdfConfig";
 
 export default function RootLayout({
   children,
@@ -144,20 +144,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={"antialiased"}>
-        <LazyPDFConfig licenseKey="your-license-key">
+        <LazyPdfConfig licenseKey="your-license-key">
           <main>{children}</main>
-        </LazyPDFConfig>
+        </LazyPdfConfig>
       </body>
     </html>
   );
 }
 ```
 
-6. **Use the LazyAppPDFViewer component in page**: Add the React PDF component to your page
+6. **Use the LazyAppPdfViewer component in page**: Add the React PDF component to your page
 
 ```jsx
 import { LazyPdfConfig } from "./components/LazyPdfConfig";
-import { LazyAppPDFViewer } from "./components/LazyAppPDFViewer";
+import { LazyAppPdfViewer } from "./components/LazyAppPdfViewer";
 
 export default function Home() {
   return (
@@ -165,11 +165,11 @@ export default function Home() {
       <h1>RP Starter Toolkit: Nextjs + Javascript</h1>
       <br />
       <h2>Default Toolbar</h2>
-      <LazyAppPDFViewer />
+      <LazyAppPdfViewer />
       <h2>Without Toolbar</h2>
-      <LazyAppPDFViewer showToolbar={false} />
+      <LazyAppPdfViewer showToolbar={false} />
       <h2>Mobile</h2>
-      <LazyAppPDFViewer defaultLayoutProps={{ style: { width: "500px" } }} />
+      <LazyAppPdfViewer defaultLayoutProps={{ style: { width: "500px" } }} />
     </div>
   );
 }
