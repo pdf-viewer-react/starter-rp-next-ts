@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 
-export const LazyAppPdfViewer = dynamic(() => import("./AppPDFViewer"), {
+export const LazyAppPDFViewer = dynamic(() => import("./AppPDFViewer"), {
   ssr: false,
 });
