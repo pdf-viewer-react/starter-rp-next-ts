@@ -136,7 +136,11 @@ export const LazyPDFConfig = dynamic(() => import("./PDFConfig"), {
 import "./globals.css";
 import { LazyPDFConfig } from "./components/LazyPDFConfig";
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode,
+}>) {
   return (
     <html lang="en">
       <body className={"antialiased"}>
